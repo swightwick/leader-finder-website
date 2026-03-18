@@ -20,7 +20,7 @@ export default function Terms() {
               1. Acceptance
             </h2>
             <p className="leading-relaxed">
-              By downloading or using the Freelancer Leader Finder app, you agree to these
+              By downloading or using the Leader Finder app, you agree to these
               Terms of Use. If you do not agree, please do not use the app.
             </p>
           </section>
@@ -30,7 +30,7 @@ export default function Terms() {
               2. Fan-Made Tool
             </h2>
             <p className="leading-relaxed">
-              Freelancer Leader Finder is an unofficial, fan-created reference tool and is
+              Leader Finder is an unofficial, fan-created reference tool and is
               not affiliated with, endorsed by, or connected to IO Interactive, or any
               other entity associated with the Hitman video game series. All game-related
               content, characters, names, and imagery are the property of their respective

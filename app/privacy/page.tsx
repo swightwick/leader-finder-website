@@ -20,7 +20,7 @@ export default function Privacy() {
               Overview
             </h2>
             <p className="leading-relaxed">
-              Freelancer Leader Finder is designed with privacy in mind. We do not collect,
+              Leader Finder is designed with privacy in mind. We do not collect,
               store, or share any personal information. This policy explains what (if
               anything) is gathered when you use the app.
             </p>
