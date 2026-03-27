@@ -37,5 +37,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Subscription failed" }, { status: 500 });
   }
 
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  if (webhookUrl) {
+    await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: `New signup: **${email}** at ${new Date().toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short", timeZone: "UTC" })} UTC`,
+      }),
+    }).catch((err) => console.error("Discord webhook error:", err));
+  }
+
   return NextResponse.json({ success: true });
 }
