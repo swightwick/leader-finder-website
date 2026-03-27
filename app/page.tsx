@@ -21,6 +21,7 @@ const MOBILE_BREAKPOINT = 640;
 
 export default function Home() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>(Array(TOTAL).fill(false));
   const [email, setEmail] = useState("");
   const [subStatus, setSubStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -71,6 +72,8 @@ export default function Home() {
       if (!el) return;
       const img = el.querySelector("img") as HTMLImageElement | null;
       if (img) { img.style.width = slideW + "px"; img.style.height = slideH + "px"; }
+      const bg = el.querySelector("div") as HTMLDivElement | null;
+      if (bg) { bg.style.width = slideW + "px"; bg.style.height = slideH + "px"; }
       el.style.marginLeft = `-${slideW / 2}px`;
     });
 
@@ -182,7 +185,7 @@ export default function Home() {
 
           <div
             ref={trackRef}
-            className="relative flex-1 overflow-hidden h-[433px]"
+            className="relative flex-1 overflow-hidden h-[444px]"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
@@ -193,14 +196,22 @@ export default function Home() {
                 className="absolute"
                 style={{ left: "50%", top: 0 }}
               >
-                <Image
-                  src={screen.src}
-                  alt={screen.alt}
-                  width={1290}
-                  height={2796}
-                  className="rounded-2xl shadow-4xl border border-white/10"
-                  style={{ width: 200, height: 433 }}
-                />
+                <div className="relative rounded-2xl overflow-hidden" style={{ background: "#111217", width: 200, height: 433 }}>
+                  <Image
+                    src={screen.src}
+                    alt={screen.alt}
+                    width={1290}
+                    height={2796}
+                    className="rounded-2xl shadow-4xl border border-white/10"
+                    style={{ width: 200, height: 433 }}
+                    onLoad={() => setLoadedImages(prev => { const next = [...prev]; next[i] = true; return next; })}
+                  />
+                  {!loadedImages[i] && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
